@@ -103,6 +103,15 @@ const LEVEL_THEMES = [
   { id: "crypt", name: "Moon Crypt", wall: "#635d76", floor: "#302c3f", ceiling: "#1b1725", door: "#6d6686", accent: "#9baef5", fog: "#11121a" },
 ];
 
+const DUNGEON_SCALE = {
+  tileSize: 4,
+  wallHeight: 4.8,
+  ceilingHeight: 4.8,
+  doorWidth: 2.6,
+  doorHeight: 3.8,
+  doorDepth: 0.32,
+};
+
 const state = {
   map: [],
   width: 0,
@@ -566,7 +575,11 @@ function getThemeMaterials(theme) {
 }
 
 function gridToWorld(x, y) {
-  return new BABYLON.Vector3((x - state.width / 2) * 3, 0, (y - state.height / 2) * 3);
+  return new BABYLON.Vector3(
+    (x - state.width / 2) * DUNGEON_SCALE.tileSize,
+    0,
+    (y - state.height / 2) * DUNGEON_SCALE.tileSize
+  );
 }
 
 function setup3D() {
@@ -890,33 +903,55 @@ function rebuildScene() {
       const theme = LEVEL_THEMES[getThemeIndexForY(y)];
       const mats = getThemeMaterials(theme);
 
-      const floor = BABYLON.MeshBuilder.CreateGround(`floor-${x}-${y}`, { width: 3, height: 3 }, world.scene);
+      const floor = BABYLON.MeshBuilder.CreateGround(
+        `floor-${x}-${y}`,
+        { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
+        world.scene
+      );
       floor.position = pos.clone();
       floor.material = mats.floor;
       world.meshes.floors.push(floor);
 
-      const ceiling = BABYLON.MeshBuilder.CreateGround(`ceiling-${x}-${y}`, { width: 3, height: 3 }, world.scene);
-      ceiling.position = pos.add(new BABYLON.Vector3(0, 3.2, 0));
+      const ceiling = BABYLON.MeshBuilder.CreateGround(
+        `ceiling-${x}-${y}`,
+        { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
+        world.scene
+      );
+      ceiling.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.ceilingHeight, 0));
       ceiling.rotation.x = Math.PI;
       ceiling.material = mats.ceiling;
       world.meshes.ceilings.push(ceiling);
 
       const tile = getTile(x, y);
       if (tile === "#") {
-        const wall = BABYLON.MeshBuilder.CreateBox(`wall-${x}-${y}`, { width: 3, height: 3.2, depth: 3 }, world.scene);
-        wall.position = pos.add(new BABYLON.Vector3(0, 1.6, 0));
+        const wall = BABYLON.MeshBuilder.CreateBox(
+          `wall-${x}-${y}`,
+          { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.wallHeight, depth: DUNGEON_SCALE.tileSize },
+          world.scene
+        );
+        wall.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.wallHeight / 2, 0));
         wall.material = mats.wall;
         world.meshes.walls.push(wall);
       } else if (tile === "E") {
-        const door = BABYLON.MeshBuilder.CreateBox(`door-${x}-${y}`, { width: 2.2, height: 2.6, depth: 0.3 }, world.scene);
-        door.position = pos.add(new BABYLON.Vector3(0, 1.3, 0));
+        const door = BABYLON.MeshBuilder.CreateBox(
+          `door-${x}-${y}`,
+          { width: DUNGEON_SCALE.doorWidth, height: DUNGEON_SCALE.doorHeight, depth: DUNGEON_SCALE.doorDepth },
+          world.scene
+        );
+        door.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.doorHeight / 2, 0));
         door.material = mats.door;
         door.metadata = { closedX: door.position.x, openAmount: 0 };
         world.meshes.doors.push(door);
       }
 
       if (tile !== "#") {
-        const torchPosition = pos.add(new BABYLON.Vector3(-1.15, 2.12, -1.1));
+        const torchPosition = pos.add(
+          new BABYLON.Vector3(
+            -DUNGEON_SCALE.tileSize * 0.38,
+            DUNGEON_SCALE.wallHeight * 0.68,
+            -DUNGEON_SCALE.tileSize * 0.36
+          )
+        );
         const torchMesh =
           createLanternInstance(`torch-${x}-${y}`, torchPosition, 0.42) ||
           BABYLON.MeshBuilder.CreateCylinder(`torch-${x}-${y}`, { diameter: 0.12, height: 0.45 }, world.scene);
@@ -928,9 +963,9 @@ function rebuildScene() {
 
         const torchLight = new BABYLON.PointLight(`torch-light-${x}-${y}`, torchPosition.add(new BABYLON.Vector3(0, 0.25, 0)), world.scene);
         torchLight.diffuse = color3(theme.accent);
-        torchLight.range = 8;
-        torchLight.intensity = 0.68;
-        world.torchLights.push({ mesh: torchMesh, light: torchLight, base: 0.68 });
+        torchLight.range = 10.5;
+        torchLight.intensity = 0.78;
+        world.torchLights.push({ mesh: torchMesh, light: torchLight, base: 0.78 });
       }
     }
   }
