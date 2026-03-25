@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stoneward Depths</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Classic Dungeon Crawler</p>
+        <h1>Stoneward Depths</h1>
+        <p class="subtitle">Descend the forgotten keep, recover the moon key, and escape the oubliette alive.</p>
+      </div>
+      <div class="status-strip">
+        <div class="status-card">
+          <span>Party</span>
+          <strong id="stat-health">0/0</strong>
+        </div>
+        <div class="status-card">
+          <span>Power</span>
+          <strong id="stat-attack">0</strong>
+        </div>
+        <div class="status-card">
+          <span>Potions</span>
+          <strong id="stat-potions">0</strong>
+        </div>
+        <div class="status-card">
+          <span>Gold</span>
+          <strong id="stat-gold">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="game-grid">
+      <section class="viewport-panel panel">
+        <div class="panel-heading">
+          <h2>Dungeon View</h2>
+          <span id="facing-label">Facing North</span>
+        </div>
+        <canvas id="viewport" width="960" height="640" aria-label="Dungeon viewport"></canvas>
+        <div class="combat-row">
+          <button id="attack-btn" class="accent">Strike</button>
+          <button id="potion-btn">Drink Potion</button>
+          <button id="ability-btn">Use Ability</button>
+          <button id="restart-btn">Restart Expedition</button>
+        </div>
+        <p class="hint" id="selection-hint">Selected target: Seraphine. Click a portrait to change healing target or trigger that hero's ability.</p>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Party</h2>
+            <span id="party-summary">4 Adventurers Ready</span>
+          </div>
+          <div id="party-panel" class="party-panel" aria-live="polite"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Map</h2>
+            <span id="objective-label">Find the Moon Key</span>
+          </div>
+          <canvas id="minimap" width="280" height="280" aria-label="Dungeon minimap"></canvas>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Controls</h2>
+            <span>Keyboard Ready</span>
+          </div>
+          <div class="controls-grid">
+            <button data-action="turn-left">Turn Left</button>
+            <button data-action="forward" class="accent">Forward</button>
+            <button data-action="turn-right">Turn Right</button>
+            <button data-action="strafe-left">Step Left</button>
+            <button data-action="backward">Back</button>
+            <button data-action="strafe-right">Step Right</button>
+          </div>
+          <p class="hint">Use <kbd>W A S D</kbd> to move, <kbd>Q</kbd>/<kbd>E</kbd> to turn, <kbd>Space</kbd> to attack, and <kbd>R</kbd> to drink a potion.</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Chronicle</h2>
+            <span id="turn-counter">Turn 0</span>
+          </div>
+          <div id="log" class="log" aria-live="polite"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

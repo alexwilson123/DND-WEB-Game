@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-label="Lyra portrait">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#9b725f"/>
+      <stop offset="100%" stop-color="#37211b"/>
+    </linearGradient>
+    <linearGradient id="robe" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f0d8a0"/>
+      <stop offset="100%" stop-color="#9d6f48"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="400" fill="url(#bg)"/>
+  <circle cx="252" cy="72" r="54" fill="#fff0aa" opacity=".18"/>
+  <path d="M64 362c20-88 66-132 96-132s76 44 96 132H64z" fill="url(#robe)"/>
+  <path d="M96 156c0-56 28-98 64-98s64 42 64 98v28c0 42-24 82-64 82s-64-40-64-82v-28z" fill="#f0d8c5"/>
+  <path d="M90 148c12-56 38-90 70-90 34 0 60 34 70 90l-18 14c-10-14-26-24-52-24-24 0-40 10-52 24l-18-14z" fill="#7b5743"/>
+  <path d="M122 168h18M180 168h18" stroke="#3e281e" stroke-linecap="round" stroke-width="6"/>
+  <path d="M144 214c12 10 20 10 32 0" stroke="#986657" stroke-linecap="round" stroke-width="5" fill="none"/>
+  <path d="M160 110l12 20 22 2-16 14 6 22-24-12-24 12 6-22-16-14 22-2z" fill="#fff0b8"/>
+  <path d="M148 266h24l16 70h-56z" fill="#c59a60"/>
+</svg>

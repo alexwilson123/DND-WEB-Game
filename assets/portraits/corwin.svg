@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-label="Corwin portrait">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#675783"/>
+      <stop offset="100%" stop-color="#1f1728"/>
+    </linearGradient>
+    <linearGradient id="cloak" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8b79b0"/>
+      <stop offset="100%" stop-color="#342347"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="400" fill="url(#bg)"/>
+  <circle cx="66" cy="80" r="54" fill="#7ed3ff" opacity=".18"/>
+  <path d="M58 360c22-82 66-130 102-130s80 48 102 130H58z" fill="url(#cloak)"/>
+  <path d="M102 154c0-56 24-96 58-96 36 0 58 40 58 96v34c0 42-24 76-58 76s-58-34-58-76v-34z" fill="#edd5c5"/>
+  <path d="M94 150c16-58 36-92 66-92 26 0 52 20 66 92l-14 14c-16-16-34-24-52-24-20 0-38 8-52 24l-14-14z" fill="#40314f"/>
+  <path d="M122 170h18M180 170h18" stroke="#312027" stroke-linecap="round" stroke-width="6"/>
+  <path d="M144 216c10 8 22 8 32 0" stroke="#946661" stroke-linecap="round" stroke-width="5" fill="none"/>
+  <path d="M214 292l22-62 18 16-10 18 18 10z" fill="#79c9ff"/>
+  <path d="M230 226l10-24 8 24z" fill="#d4f1ff"/>
+  <path d="M138 268h44l10 68h-64z" fill="#4f3a67"/>
+</svg>

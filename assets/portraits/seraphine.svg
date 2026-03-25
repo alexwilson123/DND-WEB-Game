@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-label="Seraphine portrait">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#9f7656"/>
+      <stop offset="100%" stop-color="#2f1f18"/>
+    </linearGradient>
+    <linearGradient id="armor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#d9c6a0"/>
+      <stop offset="100%" stop-color="#7c6248"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="400" fill="url(#bg)"/>
+  <circle cx="240" cy="72" r="56" fill="#f2c577" opacity=".18"/>
+  <path d="M64 360c12-88 70-132 96-132s84 44 96 132H64z" fill="url(#armor)"/>
+  <path d="M84 166c8-64 52-108 76-108 30 0 76 44 76 108l-18 46h-116l-18-46z" fill="#5f4333"/>
+  <path d="M104 158c0-45 26-80 56-80s56 35 56 80v26c0 42-24 80-56 80s-56-38-56-80v-26z" fill="#f0d7bf"/>
+  <path d="M96 154c4-58 32-98 64-98s60 40 64 98c-14-18-34-28-64-28-28 0-48 10-64 28z" fill="#6f4d3f"/>
+  <path d="M132 168h18M170 168h18" stroke="#3c261d" stroke-linecap="round" stroke-width="6"/>
+  <path d="M145 214c10 8 20 8 30 0" stroke="#8f5f4f" stroke-linecap="round" stroke-width="5" fill="none"/>
+  <path d="M124 304l36-28 36 28-36 20-36-20z" fill="#d7b36c"/>
+  <path d="M160 248l20 46-20 22-20-22 20-46z" fill="#b8904d"/>
+  <path d="M126 112l34-28 34 28-10 12h-48z" fill="#c8b39a"/>
+</svg>

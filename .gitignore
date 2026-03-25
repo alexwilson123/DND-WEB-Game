@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+# Local server / editor / tooling noise
+*.log
+*.tmp
+*.bak
+.vscode/
+.idea/
+
+# Temporary local research files
+poly_*.html
+

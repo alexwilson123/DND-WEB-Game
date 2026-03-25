@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-label="Brom portrait">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#657f8d"/>
+      <stop offset="100%" stop-color="#1b252b"/>
+    </linearGradient>
+    <linearGradient id="mail" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#93a8b0"/>
+      <stop offset="100%" stop-color="#46565e"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="400" fill="url(#bg)"/>
+  <circle cx="74" cy="84" r="52" fill="#e0b65d" opacity=".16"/>
+  <path d="M56 358c12-78 56-124 104-124s92 46 104 124H56z" fill="url(#mail)"/>
+  <path d="M84 158c0-60 34-104 76-104s76 44 76 104v24c0 44-28 88-76 88s-76-44-76-88v-24z" fill="#e9c9a3"/>
+  <path d="M80 154c10-58 44-94 80-94s70 36 80 94l-18 10c-12-20-32-26-62-26s-50 6-62 26l-18-10z" fill="#6a513d"/>
+  <path d="M92 214c18 44 46 74 68 74s50-30 68-74l-24-16H116z" fill="#714f37"/>
+  <path d="M112 170h22M186 170h22" stroke="#38241a" stroke-linecap="round" stroke-width="7"/>
+  <path d="M138 216c12 6 32 6 44 0" stroke="#895a4a" stroke-linecap="round" stroke-width="5" fill="none"/>
+  <path d="M80 314h160" stroke="#caa35c" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="72" cy="314" r="34" fill="#3b4e56" stroke="#caa35c" stroke-width="8"/>
+  <circle cx="248" cy="314" r="34" fill="#3b4e56" stroke="#caa35c" stroke-width="8"/>
+</svg>
