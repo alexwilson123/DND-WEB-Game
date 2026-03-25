@@ -104,11 +104,11 @@ const LEVEL_THEMES = [
 ];
 
 const DUNGEON_SCALE = {
-  tileSize: 4,
-  wallHeight: 4.8,
-  ceilingHeight: 4.8,
-  doorWidth: 2.6,
-  doorHeight: 3.8,
+  tileSize: 3.2,
+  wallHeight: 3.4,
+  ceilingHeight: 3.4,
+  doorWidth: 2.25,
+  doorHeight: 2.8,
   doorDepth: 0.32,
 };
 
@@ -599,14 +599,14 @@ function setup3D() {
   world.heroAnchor = new BABYLON.TransformNode("hero", world.scene);
   world.viewAnchor = new BABYLON.TransformNode("view", world.scene);
   world.viewAnchor.parent = world.heroAnchor;
-  world.camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 1.62, 0), world.scene);
+  world.camera = new BABYLON.UniversalCamera("camera", new BABYLON.Vector3(0, 1.74, 0), world.scene);
   world.camera.parent = world.viewAnchor;
   world.camera.inputs.clear();
   world.camera.fov = 0.95;
   world.camera.minZ = 0.1;
   world.camera.maxZ = 120;
 
-  world.headLight = new BABYLON.PointLight("head-light", new BABYLON.Vector3(0, 1.4, 0.6), world.scene);
+  world.headLight = new BABYLON.PointLight("head-light", new BABYLON.Vector3(0, 1.56, 0.6), world.scene);
   world.headLight.parent = world.viewAnchor;
   world.headLight.diffuse = color3("#f2c981");
   world.headLight.range = 10;
@@ -947,9 +947,9 @@ function rebuildScene() {
       if (tile !== "#") {
         const torchPosition = pos.add(
           new BABYLON.Vector3(
-            -DUNGEON_SCALE.tileSize * 0.38,
-            DUNGEON_SCALE.wallHeight * 0.68,
-            -DUNGEON_SCALE.tileSize * 0.36
+            -DUNGEON_SCALE.tileSize * 0.36,
+            DUNGEON_SCALE.wallHeight * 0.64,
+            -DUNGEON_SCALE.tileSize * 0.34
           )
         );
         const torchMesh =
@@ -963,9 +963,9 @@ function rebuildScene() {
 
         const torchLight = new BABYLON.PointLight(`torch-light-${x}-${y}`, torchPosition.add(new BABYLON.Vector3(0, 0.25, 0)), world.scene);
         torchLight.diffuse = color3(theme.accent);
-        torchLight.range = 10.5;
-        torchLight.intensity = 0.78;
-        world.torchLights.push({ mesh: torchMesh, light: torchLight, base: 0.78 });
+        torchLight.range = 8.5;
+        torchLight.intensity = 0.72;
+        world.torchLights.push({ mesh: torchMesh, light: torchLight, base: 0.72 });
       }
     }
   }
