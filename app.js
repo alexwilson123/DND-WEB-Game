@@ -107,6 +107,7 @@ const DUNGEON_SCALE = {
   tileSize: 3.2,
   wallHeight: 3.4,
   ceilingHeight: 3.4,
+  wallThickness: 0.24,
   doorWidth: 2.25,
   doorHeight: 2.8,
   doorDepth: 0.32,
@@ -894,45 +895,86 @@ function applyTheme(theme) {
   world.scene.clearColor = color4(theme.fog);
 }
 
+function createWallPanel(name, position, rotationY, material, width = DUNGEON_SCALE.tileSize) {
+  const panel = BABYLON.MeshBuilder.CreateBox(
+    name,
+    { width, height: DUNGEON_SCALE.wallHeight, depth: DUNGEON_SCALE.wallThickness },
+    world.scene
+  );
+  panel.position = position;
+  panel.rotation.y = rotationY;
+  panel.material = material;
+  world.meshes.walls.push(panel);
+  return panel;
+}
+
 function rebuildScene() {
   clearWorldMeshes();
 
   for (let y = 0; y < state.height; y += 1) {
     for (let x = 0; x < state.width; x += 1) {
+      const tile = getTile(x, y);
       const pos = gridToWorld(x, y);
       const theme = LEVEL_THEMES[getThemeIndexForY(y)];
       const mats = getThemeMaterials(theme);
 
-      const floor = BABYLON.MeshBuilder.CreateGround(
-        `floor-${x}-${y}`,
-        { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
-        world.scene
-      );
-      floor.position = pos.clone();
-      floor.material = mats.floor;
-      world.meshes.floors.push(floor);
-
-      const ceiling = BABYLON.MeshBuilder.CreateGround(
-        `ceiling-${x}-${y}`,
-        { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
-        world.scene
-      );
-      ceiling.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.ceilingHeight, 0));
-      ceiling.rotation.x = Math.PI;
-      ceiling.material = mats.ceiling;
-      world.meshes.ceilings.push(ceiling);
-
-      const tile = getTile(x, y);
-      if (tile === "#") {
-        const wall = BABYLON.MeshBuilder.CreateBox(
-          `wall-${x}-${y}`,
-          { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.wallHeight, depth: DUNGEON_SCALE.tileSize },
+      if (tile !== "#") {
+        const floor = BABYLON.MeshBuilder.CreateGround(
+          `floor-${x}-${y}`,
+          { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
           world.scene
         );
-        wall.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.wallHeight / 2, 0));
-        wall.material = mats.wall;
-        world.meshes.walls.push(wall);
-      } else if (tile === "E") {
+        floor.position = pos.clone();
+        floor.material = mats.floor;
+        world.meshes.floors.push(floor);
+
+        const ceiling = BABYLON.MeshBuilder.CreateGround(
+          `ceiling-${x}-${y}`,
+          { width: DUNGEON_SCALE.tileSize, height: DUNGEON_SCALE.tileSize },
+          world.scene
+        );
+        ceiling.position = pos.add(new BABYLON.Vector3(0, DUNGEON_SCALE.ceilingHeight, 0));
+        ceiling.rotation.x = Math.PI;
+        ceiling.material = mats.ceiling;
+        world.meshes.ceilings.push(ceiling);
+
+        const halfTile = DUNGEON_SCALE.tileSize / 2;
+        const wallY = DUNGEON_SCALE.wallHeight / 2;
+        if (isWall(x, y - 1)) {
+          createWallPanel(
+            `wall-n-${x}-${y}`,
+            pos.add(new BABYLON.Vector3(0, wallY, -halfTile + DUNGEON_SCALE.wallThickness / 2)),
+            0,
+            mats.wall
+          );
+        }
+        if (isWall(x, y + 1)) {
+          createWallPanel(
+            `wall-s-${x}-${y}`,
+            pos.add(new BABYLON.Vector3(0, wallY, halfTile - DUNGEON_SCALE.wallThickness / 2)),
+            0,
+            mats.wall
+          );
+        }
+        if (isWall(x - 1, y)) {
+          createWallPanel(
+            `wall-w-${x}-${y}`,
+            pos.add(new BABYLON.Vector3(-halfTile + DUNGEON_SCALE.wallThickness / 2, wallY, 0)),
+            Math.PI / 2,
+            mats.wall
+          );
+        }
+        if (isWall(x + 1, y)) {
+          createWallPanel(
+            `wall-e-${x}-${y}`,
+            pos.add(new BABYLON.Vector3(halfTile - DUNGEON_SCALE.wallThickness / 2, wallY, 0)),
+            Math.PI / 2,
+            mats.wall
+          );
+        }
+      }
+
+      if (tile === "E") {
         const door = BABYLON.MeshBuilder.CreateBox(
           `door-${x}-${y}`,
           { width: DUNGEON_SCALE.doorWidth, height: DUNGEON_SCALE.doorHeight, depth: DUNGEON_SCALE.doorDepth },
